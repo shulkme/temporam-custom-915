@@ -10,9 +10,11 @@ export async function GET(req: NextRequest) {
   }
 
   try {
+    // 限制10分钟内的邮件
+    const time_limit = new Date(Date.now() - 10 * 60 * 1000).toISOString();
     const result = await pool.query(
-      'SELECT * FROM emails WHERE to_email = $1 ORDER BY id DESC LIMIT 1',
-      [email],
+      'SELECT * FROM emails WHERE to_email = $1 AND created_at >= $2 ORDER BY id DESC LIMIT 1',
+      [email, time_limit],
     );
 
     return NextResponse.json({ data: result.rows[0] || null, code: 200 });
