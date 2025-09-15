@@ -2,7 +2,7 @@
 import NavMenu from '@/app/components/nav-menu';
 import { AntdSider } from '@/components/antd';
 import Logo from '@/icons/logo';
-import { useAuthorized } from '@/providers/authorized';
+import { useIdentity } from '@/providers/identity';
 import {
   RiGlobalLine,
   RiGroupLine,
@@ -15,7 +15,7 @@ import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 const Content = () => {
-  const { user } = useAuthorized();
+  const { user } = useIdentity();
 
   return (
     <>

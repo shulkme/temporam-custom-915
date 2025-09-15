@@ -46,7 +46,8 @@ request.interceptors.response.use(
   },
   (error) => {
     if (error.response) {
-      if (error.response.status === 401) {
+      const { url } = error.config;
+      if (error.response.status === 401 && !['/emails/pull'].includes(url)) {
         delToken();
         window.location.replace('/login');
       }

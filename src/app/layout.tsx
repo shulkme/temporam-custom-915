@@ -1,6 +1,6 @@
 import NProgressBar from '@/app/components/nprogress-bar';
-import { AuthorizedProvider } from '@/providers/authorized';
 import ClarityProvider from '@/providers/clarity';
+import { IdentityProvider } from '@/providers/identity';
 import { ThemeProvider } from '@/providers/theme';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
@@ -40,7 +40,7 @@ export default function RootLayout({
             />
             <ThemeProvider initMode={theme}>
               <App>
-                <AuthorizedProvider>{children}</AuthorizedProvider>
+                <IdentityProvider>{children}</IdentityProvider>
               </App>
             </ThemeProvider>
           </AntdRegistry>

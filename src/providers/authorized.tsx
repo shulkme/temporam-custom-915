@@ -1,21 +1,19 @@
 'use client';
 import { getUserProfile } from '@/api/user';
-import { UserRecord } from '@/api/user/types';
 import GlobalLoading from '@/components/global-loading';
+import { useIdentity } from '@/providers/identity';
 import { useRequest } from 'ahooks';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 const AuthorizedContext = createContext<{
-  user?: UserRecord;
-  setUser: React.Dispatch<React.SetStateAction<UserRecord | undefined>>;
   loading: boolean;
 } | null>(null);
 
 const AuthorizedProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const [user, setUser] = useState<UserRecord>();
+  const { setUser } = useIdentity();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const pathname = usePathname();
@@ -52,8 +50,6 @@ const AuthorizedProvider: React.FC<{
     <AuthorizedContext.Provider
       value={{
         loading,
-        user,
-        setUser,
       }}
     >
       {children}

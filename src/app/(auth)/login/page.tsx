@@ -7,7 +7,7 @@ import {
   AntdLink,
   AntdParagraph,
 } from '@/components/antd';
-import { useAuthorized } from '@/providers/authorized';
+import { useIdentity } from '@/providers/identity';
 import { delToken, setToken } from '@/utils/token';
 import { useRequest } from 'ahooks';
 import { Button, Divider, FormProps, Input } from 'antd';
@@ -16,7 +16,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export default function Page() {
-  const { setUser } = useAuthorized();
+  const { setUser } = useIdentity();
   const [form] = AntdForm.useForm();
   const [errMsg, setErrMsg] = useState<string>();
   const router = useRouter();
