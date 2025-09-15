@@ -1,9 +1,14 @@
+import { requireAuth } from '@/lib/auth';
 import pool from '@/lib/db';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
   const params = await req.nextUrl.searchParams;
   const email = params.get('email');
+  // 鉴权
+  const userPayload = requireAuth(req);
+  if (userPayload instanceof NextResponse) return userPayload;
+
   if (!email) {
     return NextResponse.json({ msg: '数据异常', code: 400 }, { status: 400 });
   }

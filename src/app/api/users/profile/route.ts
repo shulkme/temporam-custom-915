@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
   try {
     // 查询用户信息，不返回密码
     const result = await pool.query(
-      'SELECT id, username, created_time, updated_time FROM users WHERE id=$1',
+      'SELECT id, username, created_time, updated_time FROM users WHERE id=$1 AND status = 1',
       [userPayload.userId],
     );
 

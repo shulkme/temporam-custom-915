@@ -6,28 +6,28 @@ import {
   AntdInputPassword,
   AntdParagraph,
 } from '@/components/antd';
-import { useAuthorized } from '@/providers/authorized';
-import { setToken } from '@/utils/token';
 import { useRequest } from 'ahooks';
-import { Button, Divider, FormProps, Input } from 'antd';
+import { App, Button, Divider, FormProps, Input } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function Page() {
-  const { setUser } = useAuthorized();
+  // const { setUser } = useAuthorized();
   const [form] = AntdForm.useForm();
   const [errMsg, setErrMsg] = useState<string>();
   const router = useRouter();
+  const { message } = App.useApp();
   const { run: doSubmit, loading: submitting } = useRequest(register, {
     manual: true,
-    onSuccess: (res) => {
-      const { token, user } = res.data;
-      setUser(user);
-      setToken(token);
+    onSuccess: () => {
+      // const { token, user } = res.data;
+      // setUser(user);
+      // setToken(token);
       setErrMsg(undefined);
       form.resetFields();
-      router.replace('/');
+      message.success('注册成功');
+      router.replace('/login');
     },
     onError: (e) => {
       setErrMsg(e.message);

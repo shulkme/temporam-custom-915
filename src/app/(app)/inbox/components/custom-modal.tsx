@@ -1,6 +1,6 @@
 import { useInbox } from '@/app/(app)/inbox/contexts';
 import { AntdForm, AntdFormItem } from '@/components/antd';
-import { RiDice3Line } from '@remixicon/react';
+import { RiDice3Line, RiVipCrown2Fill } from '@remixicon/react';
 import {
   Button,
   ConfigProvider,
@@ -100,6 +100,18 @@ const CustomModal: React.FC<{
                     options={domains}
                     placeholder="域名"
                     popupMatchSelectWidth={200}
+                    optionRender={(oriOption) => {
+                      return (
+                        <div className="flex justify-between items-center">
+                          <div>{oriOption.label}</div>
+                          {oriOption.data?.user_id && (
+                            <div className="text-xs text-yellow-500">
+                              <RiVipCrown2Fill size={16} />
+                            </div>
+                          )}
+                        </div>
+                      );
+                    }}
                   />
                 </AntdFormItem>
               </div>

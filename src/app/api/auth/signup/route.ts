@@ -1,6 +1,5 @@
 import pool from '@/lib/db';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
@@ -40,27 +39,27 @@ export async function POST(req: NextRequest) {
 
     const hash_password = await bcrypt.hash(password, 10);
 
-    const result = await pool.query(
-      'INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id, username',
-      [username, hash_password],
+    await pool.query(
+      'INSERT INTO users (username, password, nickname) VALUES ($1, $2, $3) RETURNING id, username',
+      [username, hash_password, username],
     );
 
-    const user = result.rows[0];
-
-    const token = jwt.sign(
-      {
-        userId: user.id,
-        username: username,
-      },
-      process.env.JWT_SECRET!,
-      { expiresIn: '2h' },
-    );
+    // const user = result.rows[0];
+    //
+    // const token = jwt.sign(
+    //   {
+    //     userId: user.id,
+    //     username: username,
+    //   },
+    //   process.env.JWT_SECRET!,
+    //   { expiresIn: '2h' },
+    // );
 
     return NextResponse.json({
       code: 200,
-      data: {
-        token,
-      },
+      // data: {
+      //   token,
+      // },
     });
   } catch (e) {
     console.log(e);

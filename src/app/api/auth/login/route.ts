@@ -32,6 +32,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ msg: '密码错误', code: 400 }, { status: 400 });
     }
 
+    if (user.status < 1) {
+      return NextResponse.json(
+        { msg: '当前账户未激活，请联系客服', code: 403 },
+        { status: 403 },
+      );
+    }
+
     const token = jwt.sign(
       { userId: user.id, username: user.username },
       process.env.JWT_SECRET!,
