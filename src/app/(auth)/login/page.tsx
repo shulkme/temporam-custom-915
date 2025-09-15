@@ -36,10 +36,6 @@ export default function Page() {
     },
   });
 
-  const handleContact = () => {
-    window.dispatchEvent(new CustomEvent('global:contact:open'));
-  };
-
   const onFinish: FormProps['onFinish'] = (values) => {
     doSubmit(values);
   };

@@ -2,11 +2,14 @@
 import {
   AntdContent,
   AntdFooter,
+  AntdHeader,
   AntdLayout,
   AntdSider,
 } from '@/components/antd';
 import Logo from '@/icons/logo';
+import { RiTelegram2Fill } from '@remixicon/react';
 import { useResponsive } from 'ahooks';
+import { Button } from 'antd';
 import Image from 'next/image';
 import React from 'react';
 
@@ -35,6 +38,19 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
         </AntdSider>
       )}
       <AntdLayout>
+        <AntdHeader>
+          <div className="flex justify-end items-center p-8">
+            <Button
+              href={process.env.NEXT_PUBLIC_SUPPORT_TELEGRAM}
+              target="_blank"
+              type="link"
+              className="leading-none"
+              icon={<RiTelegram2Fill size={20} />}
+            >
+              联系客服
+            </Button>
+          </div>
+        </AntdHeader>
         <AntdContent className="flex flex-col items-center justify-center">
           <div className="max-w-lg w-full mx-auto p-6">{children}</div>
         </AntdContent>
