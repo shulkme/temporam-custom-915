@@ -28,3 +28,24 @@ export async function DELETE(
     return NextResponse.json({ msg: '删除失败', code: 500 }, { status: 500 });
   }
 }
+
+export async function PUT(req: NextRequest, ctx: { params: { id: string } }) {
+  const { id } = ctx.params;
+  // 鉴权
+  const userPayload = requireAuth(req);
+  if (userPayload instanceof NextResponse) return userPayload;
+
+  try {
+    const { remark } = await req.json();
+
+    await pool.query('UPDATE accounts SET remark = $1 WHERE id = $2', [
+      remark,
+      id,
+    ]);
+
+    return NextResponse.json({ msg: '修改成功', code: 200 });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ msg: '修改失败', code: 500 }, { status: 500 });
+  }
+}

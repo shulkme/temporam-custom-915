@@ -17,3 +17,7 @@ export async function addAccount(data: AccountData) {
 export async function delAccount(id: number) {
   return await request.delete(`/accounts/${id}`);
 }
+
+export async function setAccountRemark(id: number, data: { remark: string }) {
+  return await request.put(`/accounts/${id}`, data);
+}
