@@ -1,0 +1,14 @@
+@layer theme, base, antd, components, utilities;
+
+@import 'tailwindcss';
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-background: oklch(255 0 0);
+}
+
+@layer base {
+  body {
+    @apply bg-white text-black dark:bg-black dark:text-white;
+  }
+}

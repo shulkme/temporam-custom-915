@@ -1,0 +1,26 @@
+/* HTML:  */
+.loader {
+  height: 4px;
+  width: 130px;
+  --bar: linear-gradient(var(--ant-color-primary), var(--ant-color-primary)) no-repeat;
+  background: var(--bar), var(--bar), var(--ant-color-primary-bg);
+  background-size: 50% 100%;
+  animation: l16 3s infinite;
+}
+@keyframes l16 {
+  0% {
+    background-position:
+      -150% 0,
+      -150% 0;
+  }
+  66% {
+    background-position:
+      250% 0,
+      -150% 0;
+  }
+  100% {
+    background-position:
+      250% 0,
+      250% 0;
+  }
+}
