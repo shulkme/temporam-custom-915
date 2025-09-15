@@ -28,14 +28,14 @@ export async function getEmailDetail(
 
 /**
  *拉取邮件
- * @param code
+ * @param email
  */
 export async function pullEmailDetail(
-  code: string,
+  email: string,
 ): Promise<HttpResponse<EmailRecord>> {
   return await request.get('/emails/pull', {
     params: {
-      code,
+      email,
     },
   });
 }

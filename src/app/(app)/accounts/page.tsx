@@ -10,8 +10,8 @@ import { Alert, App, Popconfirm, Space, Table } from 'antd';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 
-const generateURL = (email: string, code: string) => {
-  return `${process.env.NEXT_PUBLIC_BASE_URL}/emails?email=${email}&code=${code}`;
+const generateURL = (email: string) => {
+  return `${process.env.NEXT_PUBLIC_BASE_URL}/emails?email=${email}`;
 };
 export default function Page() {
   const { message } = App.useApp();
@@ -100,7 +100,7 @@ export default function Page() {
                     <Space size="middle">
                       <AntdLink
                         copyable={{
-                          text: generateURL(record.email, record.code),
+                          text: generateURL(record.email),
                           icon: [<>复制链接</>, <>复制成功</>],
                         }}
                       />

@@ -15,7 +15,7 @@ export default function Page() {
   const [errMsg, setErrMsg] = useState<string>();
   const [record, setRecord] = useState<EmailRecord>();
   const params = useSearchParams();
-  const code = params.get('code');
+  // const code = params.get('code');
   const email = params.get('email');
   const [nextRefreshTime, setNextRefreshTime] = useState<number>();
   const responsive = useResponsive();
@@ -48,12 +48,12 @@ export default function Page() {
   });
 
   useEffect(() => {
-    if (code && email) {
-      run(code);
+    if (email) {
+      run(email);
     } else {
       setErrMsg('无效链接');
     }
-  }, [code, email, run]);
+  }, [email, run]);
 
   return (
     <PageContainer title="收件箱" size="medium">

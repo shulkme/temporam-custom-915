@@ -1,6 +1,5 @@
 import { requireAuth } from '@/lib/auth';
 import pool from '@/lib/db';
-import jwt from 'jsonwebtoken';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
@@ -30,9 +29,9 @@ export async function GET(req: NextRequest) {
     const items = (result.rows || []).map((item) => {
       return {
         ...item,
-        code: jwt.sign({ email: item.email }, process.env.JWT_SECRET!, {
-          expiresIn: '2h',
-        }),
+        // code: jwt.sign({ email: item.email }, process.env.JWT_SECRET!, {
+        //   expiresIn: '2h',
+        // }),
       };
     });
 
